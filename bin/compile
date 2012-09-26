@@ -23,3 +23,8 @@ echo "-----> Extracting PhantomJS binaries"
 mkdir -p $BUILD_DIR/vendor/phantomjs
 tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
 
+
+echo "-----> Cloning casperjs"
+
+cd $BUILD_DIR/vendor
+git clone git://github.com/n1k0/casperjs.git
