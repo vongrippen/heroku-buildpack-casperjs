@@ -2,6 +2,9 @@
 
 set -e
 
+# paths.
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+ROOT_DIR=$(dirname ${BIN_DIR})
 BUILD_DIR=$1
 CACHE_DIR=$2
 
@@ -13,18 +16,21 @@ S3_BUCKET="stomita-buildpack-phantomjs"
 FILE_NAME="buildpack-phantomjs-${VERSION}.tar.gz"
 BUILDPACK_PHANTOMJS_PACKAGE="http://${S3_BUCKET}.s3.amazonaws.com/${FILE_NAME}"
 
-mkdir -p $CACHE_DIR
-if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+mkdir -p ${CACHE_DIR}
+if ! [ -e ${CACHE_DIR}/${FILE_NAME} ]; then
   echo "-----> Fetching PhantomJS buildpack binaries"
-  curl $BUILDPACK_PHANTOMJS_PACKAGE -s -o $CACHE_DIR/$FILE_NAME
+  curl $BUILDPACK_PHANTOMJS_PACKAGE -s -o $CACHE_DIR/${FILE_NAME}
 fi
 
-echo "-----> Extracting PhantomJS binaries" 
-mkdir -p $BUILD_DIR/vendor/phantomjs
-tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
-
+echo "-----> Extracting PhantomJS binaries"
+mkdir -p ${BUILD_DIR}/vendor/phantomjs
+tar zxf ${CACHE_DIR}/${FILE_NAME} -C ${BUILD_DIR}/vendor/phantomjs
 
 echo "-----> Cloning casperjs"
-
-cd $BUILD_DIR/vendor
+cd ${BUILD_DIR}/vendor
 git clone git://github.com/n1k0/casperjs.git
+
+echo "-----> Creating ${PROFILE_PATH}"
+cd ${BUILD_DIR}
+mkdir -p .profile.d
+cp ${BIN_DIR}/phantomjs.sh .profile.d/
