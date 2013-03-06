@@ -30,7 +30,7 @@ echo "-----> Cloning casperjs"
 cd ${BUILD_DIR}/vendor
 git clone git://github.com/n1k0/casperjs.git
 
-echo "-----> Creating ${PROFILE_PATH}"
+echo "-----> Creating .profile.d/casperjs.sh"
 cd ${BUILD_DIR}
 mkdir -p .profile.d
-cp ${BIN_DIR}/phantomjs.sh .profile.d/
+cp ${BIN_DIR}/casperjs.sh .profile.d/

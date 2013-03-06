@@ -1,14 +1,26 @@
-Heroku buildpack: PhantomJS
+Heroku buildpack: CasperJS
 =======================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) of CasperJS(http://casperjs.org).
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) of [CasperJS](http://casperjs.org) / [PhantomJS](http://phantomjs.org/).
 
 Usage
 -----
 
 Example usage:
 
-    $ heroku create --stack cedar --buildpack http://github.com/misza222/heroku-buildpack-casperjs.git
+    $ heroku create --stack cedar --buildpack https://github.com/leesei/heroku-buildpack-casperjs.git
+
+    $ git push heroku master
+
+Alternately, you can cascade with other buildpacks:
+
+    $ heroku create --stack cedar --buildpack https://github.com/ddollar/heroku-buildpack-multi.git
+
+    $ echo https://github.com/leesei/heroku-buildpack-casperjs.git > .buildpacks
+
+    # echo [other buildpack] >> .buildpacks
+
+    # `git add` your files
 
     $ git push heroku master
 
