@@ -29,6 +29,9 @@ tar zxf ${CACHE_DIR}/${FILE_NAME} -C ${BUILD_DIR}/vendor/phantomjs
 echo "-----> Cloning casperjs"
 cd ${BUILD_DIR}/vendor
 git clone git://github.com/n1k0/casperjs.git
+cd casperjs
+git checkout 1.0.2
+cd ..
 
 echo "-----> Creating .profile.d/casperjs.sh"
 cd ${BUILD_DIR}
